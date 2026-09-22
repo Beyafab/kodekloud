@@ -1,0 +1,36 @@
+# first see what exists in home directory and permissions
+ls -la 
+#or 
+ll 
+"============"
+bob@caleston-lp10:~$ ls -la
+total 32
+drwxr-x--- 1 bob  bob  4096 Sep 22 16:42 .
+drwxr-xr-x 1 root root 4096 Mar 17  2026 ..
+-rw-r--r-- 1 bob  bob   220 Mar 31  2024 .bash_logout
+-rw-r--r-- 1 root root  565 Sep 22 16:29 .bash_profile
+-rw-r--r-- 1 bob  bob  3771 Mar 31  2024 .bashrc
+-rw-r--r-- 1 bob  bob   807 Mar 31  2024 .profile
+drwxr-x--- 2 bob  bob  4096 Sep 22 16:42 sports
+"=============="
+# we can see the permission for the owner is full
+#permission for the group is read and execute
+#permission for other group is none( no permission)
+#owner of the group is bob
+
+#changing groups and others  to only have read and execute permission on soccer file
+chmod 755 soccer
+
+#Now, add back the write permission for group and remove all permission for others for the same file called soccer.
+chmod 770 soccer
+
+#Now, change the ownership of the file called soccer to the service account called mercury.
+sudo chown mercury soccer 
+#We have created another file in the sports directory. Change the ownership for the entire sports directory including all the files inside to the service account mercury.
+
+
+#Try to do this with one single command. Explore the -R recursive flag with the chown command.
+cd ..
+sudo chown -R mercury sports
+
+
