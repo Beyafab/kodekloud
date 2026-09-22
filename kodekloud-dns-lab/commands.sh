@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -euo pipefail
+#first see what is inside /etc/resolv.cof
+cat /etc/resolv.conf
 
 # Set Google DNS
 sudo sed -i '/^nameserver/d' /etc/resolv.conf
