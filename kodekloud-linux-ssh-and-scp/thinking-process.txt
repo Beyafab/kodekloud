@@ -1,0 +1,53 @@
+#Which port number does the SSH service use by default?
+
+#Bob's default password is caleston123
+
+#to know what port ssh listen to I first checked 
+cat /etc/ssh/ssh_config
+#but there is no port number to find then i checked 
+sudo ss -tlnp | grep sshd
+#whcih resulted in 
+//*   
+LISTEN 0      4096         0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=1061,fd=3),("systemd",pid=1,fd=46))  
+LISTEN 0      4096            [::]:22           [::]:*    users:(("sshd",pid=1061,fd=4),("systemd",pid=1,fd=47))
+*//
+
+
+#If you run ssh devapp01 in the terminal, which user are you using to connect to the server?
+
+#If unsure, try it out on the terminal.
+It is bob
+
+#Now, let's set up password-less ssh between Bob's laptop and the Dev Application server devapp01.
+
+#We will make use of bob's user account that has been created in the application server.
+
+#It uses the same default password: caleston123
+
+#I first generate ssh key 
+
+ssh-keygen -t rsa 
+
+#confirm it using 
+ls -l ~/.ssh/
+
+#output 
+total 8
+-rw------- 1 bob bob 3381 Sep 24 08:44 id_rsa
+-rw-r--r-- 1 bob bob  738 Sep 24 08:44 id_rsa.pub
+
+
+#Copy the public key to the target server devapp01.
+#Make use of the ssh-copy-id command
+
+#Copy the public key to the target server devapp01.
+
+#Make use of the ssh-copy-id command
+ssh-copy-id bob@devapp01
+
+#Which file on the target server is the public key copied in to?
+/home/bob/.ssh/authorized_keys
+
+#Finally, copy the file /home/bob/caleston-code.tar.gz from Bob's laptop to the server devapp01
+
+scp /home/bob/caleston-code.tar.gz devapp01:/home/bob
