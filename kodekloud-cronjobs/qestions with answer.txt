@@ -1,0 +1,48 @@
+Which command is used to list all the cronjobs created for a user?
+
+it is crontab -l
+
+How many cronjobs are currently scheduled for bob?
+
+crontab -l # shows 6 jobs
+
+How about now? How many cronjobs are scheduled for the root user ?
+
+Password for root user: caleston123
+
+sudo crontab -l #show 1 job for the root user
+
+nspect the cronjobs scheduled for bob again. Which command/script is run at 11 minutes past 11 PM every Tuesday?
+11 11 * * 3 /usr/local/bin/system-reporter.sh
+23 11 * * 2 /usr/local/bin/system-checker.sh
+23 23 * * 2 /usr/local/bin/system-debugger.sh
+11 23 * * * /usr/local/bin/system-tester.sh
+11 23 * 2 * /usr/local/bin/system-troubleshooter.sh
+11 23 * * 2 /usr/local/bin/system-identifier.sh #answer
+
+Schedule a cronjob to run the script /usr/local/bin/last-reboot.sh on the first day of every month at 6 AM.
+
+The script should not run any other day.
+
+crontab -e #opens scheduler 
+
+#edite with
+0 6 1 * * /usr/local/bin/last-reboot.sh
+
+When will the script /usr/local/bin/system-troubleshooter.sh be run?
+
+Inspect the cronjobs scheduled for bob.
+
+answer : 11 minutes past 11 pm on all days in the month of February
+
+The script /usr/local/bin/system-debugger.sh was incorrectly scheduled. It should run every half hour at minute 0 and minute 30
+
+
+Example: 09:00, 09:30, 10:00, 10:30, 11:00, 11:30……so on every half hour.
+
+crontab -e
+
+*/30 * * * * /usr/local/bin/system-debugger.sh #edited like this
+
+
+
